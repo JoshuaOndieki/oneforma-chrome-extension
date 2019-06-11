@@ -499,10 +499,23 @@ function timer(){
 
 
         	}
-        	cell9.innerHTML = '<button type="button" onclick="DeleteRow(this.parentElement.parentElement.rowIndex);" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>';
+        	cell9.innerHTML = '<button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>';
+            cell9.getElementsByTagName('button')[0].addEventListener('click', function(){
+                formaDeleteRow(this.parentElement.parentElement.rowIndex);
+            });
 
         	// Push the object and the index
         	words.push(wordindex);
+        }
+
+        function formaDeleteRow(index){
+        	var row = table.rows[index];
+        	var wordindex = row.cells[9].innerHTML;
+        	words = words.filter(function(value, index, arr){
+                return value != wordindex;
+            });
+        	table.deleteRow(index);
+
         }
 
         function getSelectValues(select) {
