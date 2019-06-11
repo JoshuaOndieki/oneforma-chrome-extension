@@ -17,20 +17,16 @@ function timer(){
 
         var query_box = iframe.document.getElementById('query_box');
 
-        query_box.style.width = '400px';
         query_box.style.display = 'inline-block';
-        query_box.style.height = '202px';
-        query_box.style.float = 'left';
         query_box.style.textAlign = 'center';
         query_box.style.height = '30px';
         query_box.style.width = '100%';
         query_box.style.fontSize = 'large';
 
-
         var styles = String.raw`
         #formamain{
         width: 600px;
-        height: 202px;
+        height: 220px;
         margin: auto;
         background: #f5f5f5;
         color: white;
@@ -133,6 +129,7 @@ function timer(){
 
         #formaattributes, #formavattributes{
           display: block;
+          justify-content: center;
           width: 99%;
           margin-left: auto;
           margin-right: auto
@@ -140,9 +137,50 @@ function timer(){
 
         .formaattrbtns{
           border: none;
-          height: 20px;
-          color: black
-      }`;
+          height: 25px;
+          color: black;
+
+          display: inline-block;
+          top: auto;
+          bottom: auto;
+          position: relative;
+      }
+
+      .col-lg-10 > .row:not(last-child){
+          display: inline-flex;
+          margin-left: 0;
+          width: min-content;
+          margin-right: 0
+      }
+
+      .col-lg-10{
+          margin-left: 0;
+          width: max-content;
+          padding: 3px
+      }
+
+      .panel-body{
+          padding-left: 0px
+      }
+
+      .col-sm-12{
+          padding: 0px
+      }
+
+      #query_table{
+          font-size: 11px;
+      }
+
+      #formaattributesbuttons, #formavattributesbuttons{
+          display: flex;
+          justify-content: center
+      }
+
+      #submit_button{
+          width: 80%
+      }
+
+      `;
 
 
         head = iframe.document.head || iframe.document.getElementsByTagName('head')[0];
@@ -157,11 +195,7 @@ function timer(){
         } else {
           style.appendChild(iframe.document.createTextNode(styles));
         }
-    /*
-        // var elem = ifrDoc.createElement("div");
-        // elem.textContent = 'Test';
-        // ifrDoc.body.appendChild(elem);
-    */
+
         var formamain = iframe.document.createElement('DIV');
         formamain.id = 'formamain';
         console.log(iframe.document); iframe.document.getElementById('TX_textbox_container').appendChild(formamain);
@@ -234,22 +268,10 @@ function timer(){
         formaattributesselect.multiple = 'multiple';
         iframe.document.getElementById('formaattributes').appendChild(formaattributesselect);
 
-    /*
-        var formaattributesbtn1 = iframe.document.createElement('BUTTON');
-        formaattributesbtn1.innerHTML = 'WORD 1';
-        formaattributesbtn1.className = 'formaattrbtns';
-        iframe.document.getElementById('formaattributes').appendChild(formaattributesbtn1);
+        var formaattributesbuttons = iframe.document.createElement('DIV');
+        formaattributesbuttons.id = 'formaattributesbuttons';
+        iframe.document.getElementById('formaattributes').appendChild(formaattributesbuttons);
 
-        var formaattributesbtn2 = iframe.document.createElement('BUTTON');
-        formaattributesbtn2.innerHTML = 'WORD 2';
-        formaattributesbtn2.className = 'formaattrbtns';
-        iframe.document.getElementById('formaattributes').appendChild(formaattributesbtn2);
-
-        var formaattributesbtnn = iframe.document.createElement('BUTTON');
-        formaattributesbtnn.innerHTML = 'WORD N...';
-        formaattributesbtnn.className = 'formaattrbtns';
-        iframe.document.getElementById('formaattributes').appendChild(formaattributesbtnn);
-    */
 
         var formavattributes = iframe.document.createElement('DIV');
         formavattributes.id = 'formavattributes';
@@ -266,24 +288,11 @@ function timer(){
         formavattributesselect.multiple = 'multiple';
         iframe.document.getElementById('formavattributes').appendChild(formavattributesselect);
 
+        var formavattributesbuttons = iframe.document.createElement('DIV');
+        formavattributesbuttons.id = 'formavattributesbuttons';
+        iframe.document.getElementById('formavattributes').appendChild(formavattributesbuttons);
+
         setFormaAttributes();
-
-    /*
-        var formavattributesbtn1 = iframe.document.createElement('BUTTON');
-        formavattributesbtn1.innerHTML = 'WORD 1';
-        formavattributesbtn1.className = 'formaattrbtns';
-        iframe.document.getElementById('formavattributes').appendChild(formavattributesbtn1);
-
-        var formavattributesbtn2 = iframe.document.createElement('BUTTON');
-        formavattributesbtn2.innerHTML = 'WORD 2';
-        formavattributesbtn2.className = 'formaattrbtns';
-        iframe.document.getElementById('formavattributes').appendChild(formavattributesbtn2);
-
-        var formavattributesbtnn = iframe.document.createElement('BUTTON');
-        formavattributesbtnn.innerHTML = 'WORD N...';
-        formavattributesbtnn.className = 'formaattrbtns';
-        iframe.document.getElementById('formavattributes').appendChild(formavattributesbtnn);
-    */
 
         var formabuttons = iframe.document.createElement('DIV');
         formabuttons.id = 'formabuttons';
@@ -296,30 +305,6 @@ function timer(){
             formaCreateObject();
         });
         iframe.document.getElementById('formabuttons').appendChild(formacreateobject);
-
-    /*
-        // function getSelectionText() {
-        //     console.log('getting selection');
-        //     var iframe = document.getElementById('webapp_frame').contentWindow;
-        //     textarea = iframe.document.getElementById('query_box');
-        //     var text = "";
-        //     if (typeof iframe.getSelection != "undefined") {
-        //         text = iframe.getSelection().toString();
-        //     } else if (typeof iframe.document.selection != "undefined" && iframe.document.selection.type == "Text") {
-        //         text = iframe.document.selection.createRange().text;
-        //     }
-        //     return text;
-        // }
-        //
-        // console.log('rada ya selection');
-        // var iframe = document.getElementById('webapp_frame').contentWindow;
-        // // iframe.onmouseup = doSomethingWithSelectedText;
-        // // iframe.onkeyup = doSomethingWithSelectedText;
-        //
-        // iframe.onmouseup = iframe.onkeyup = iframe.onselectionchange = function() {
-        //     iframe.document.getElementById("formawords").value = getSelectionText();
-        // }
-    */
 
         function getSelectionText() {
             var text = '';
@@ -385,7 +370,7 @@ function timer(){
                 formaattributesbtn.addEventListener('click', function(){
                     addRemoveAttribute('attribute', this.id.split('-')[1]);
                 });
-                iframe.document.getElementById('formaattributes').appendChild(formaattributesbtn);
+                iframe.document.getElementById('formaattributesbuttons').appendChild(formaattributesbtn);
 
 
                 var optionv = iframe.document.createElement('OPTION');
@@ -401,7 +386,7 @@ function timer(){
                 formavattributesbtn.addEventListener('click', function(){
                     addRemoveAttribute('vattribute', this.id.split('-')[1]);
                 });
-                iframe.document.getElementById('formavattributes').appendChild(formavattributesbtn);
+                iframe.document.getElementById('formavattributesbuttons').appendChild(formavattributesbtn);
 
             }
         }
