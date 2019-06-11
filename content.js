@@ -15,81 +15,23 @@ function timer(){
 
         console.log('time up');
 
-    /*
-        // console.log('-----------------');
-        // console.log(document);
-        // console.log('-----------------');
-        //
-        //
-        // document.getElementById('webapp_frame').contentWindow.onload = function (){
-        //     console.log(document.getElementById('webapp_frame').contentWindow.document);
-        //     var lframe = document.getElementById('webapp_frame').contentDocument;
-        //     var formamain = lframe.createElement('DIV');
-        //     formamain.id = 'formamain';
-        //     formamain.innerHTML = 'FORMA MAIN';
-        //     console.log(lframe);
-        //     console.log(lframe.getElementById('query_box'));
-        //     lframe.getElementById('TX_textbox_container').appendChild(formamain);
-        // }
-
-        // iframe = (iframe.contentDocument)
-        //    ? iframe.contentDocument
-        //    : iframe.contentWindow.document;
-
-        // var ifrDoc = iframe.contentDocument;
-
-        // if(typeof iframe.createStyleSheet === 'undefined') {
-        //     iframe.createStyleSheet = (function() {
-        //         function createStyleSheet(href) {
-        //             if(typeof href !== 'undefined') {
-        //                 var element = iframe.createElement('link');
-        //                 element.type = 'text/css';
-        //                 element.rel = 'stylesheet';
-        //                 element.href = href;
-        //             }
-        //             else {
-        //                 var element = iframe.createElement('style');
-        //                 element.type = 'text/css';
-        //             }
-        //
-        //             iframe.getElementsByTagName('head')[0].appendChild(element);
-        //             var sheet = iframe.styleSheets[iframe.styleSheets.length - 1];
-        //
-        //             if(typeof sheet.addRule === 'undefined')
-        //                 sheet.addRule = addRule;
-        //
-        //             if(typeof sheet.removeRule === 'undefined')
-        //                 sheet.removeRule = sheet.deleteRule;
-        //
-        //             return sheet;
-        //         }
-        //
-        //         function addRule(selectorText, cssText, index) {
-        //             if(typeof index === 'undefined')
-        //                 index = this.cssRules.length;
-        //
-        //             this.insertRule(selectorText + ' {' + cssText + '}', index);
-        //         }
-        //
-        //         return createStyleSheet;
-        //     })();
-        // }
-        //
-        // iframe.createStyleSheet('styles.css');
-    */
-
         var query_box = iframe.document.getElementById('query_box');
 
         query_box.style.width = '400px';
         query_box.style.display = 'inline-block';
         query_box.style.height = '202px';
         query_box.style.float = 'left';
+        query_box.style.textAlign = 'center';
+        query_box.style.height = '30px';
+        query_box.style.width = '100%';
+        query_box.style.fontSize = 'large';
 
 
         var styles = String.raw`
         #formamain{
         width: 600px;
         height: 202px;
+        margin: auto;
         background: #f5f5f5;
         color: white;
 
@@ -596,3 +538,4 @@ function timer(){
     });
 
 }
+
