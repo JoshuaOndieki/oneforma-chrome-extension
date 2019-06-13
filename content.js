@@ -443,6 +443,11 @@ function timer(){
             var new_index = iframe.document.getElementById('query_box').value.split(word)[0].length;
         	var wordindex = object.value + new_index;
 
+            if(iframe.document.getElementById('query_box').value.includes(word) === false){
+                alert('The object you intend to create does not appear in the query!');
+                return false;
+            }
+
             if(words.indexOf(wordindex) > -1){
                 console.log(words);
                 alert("This word has been already labelled");
