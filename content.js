@@ -341,7 +341,7 @@ function timer(){
             if( getSelectionText() != ''){
                 iframe.document.getElementById('formawords').value = getSelectionText();
                 setFormaAttributes();
-                deselect();
+                // deselect(); // Temporarily disable this functionality to enable copying text and also searching the selected text.
             }
 
         };
