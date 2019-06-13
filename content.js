@@ -322,11 +322,26 @@ function timer(){
             return text;
         }
 
+        function deselect(){
+          var selection = ('getSelection' in iframe)
+            ? iframe.getSelection()
+            : ('selection' in document)
+              ? iframe.document.selection
+              : null;
+          if ('removeAllRanges' in selection){
+              selection.removeAllRanges();
+          }
+          else if ('empty' in selection){
+              selection.empty();
+          }
+      }
+
 
         iframe.onmouseup = iframe.onkeyup = iframe.onselectionchange = function() {
             if( getSelectionText() != ''){
                 iframe.document.getElementById('formawords').value = getSelectionText();
                 setFormaAttributes();
+                deselect();
             }
 
         };
@@ -536,4 +551,3 @@ function timer(){
     });
 
 }
-
