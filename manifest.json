@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Oneforma Extension ~ OJ",
     "description": "Makes working in Oneforma Query labeling project efficient!",
-    "version": "1.1",
+    "version": "1.2",
     "content_scripts":
     [
         {
