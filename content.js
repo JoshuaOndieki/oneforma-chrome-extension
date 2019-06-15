@@ -16,6 +16,7 @@ window.onload = function checkIframeLoaded() {
         iframe.onload = function(){
             console.log('iframe loaded!');
             formaWrapper();
+
         };
         return true;
     };
@@ -586,5 +587,170 @@ function formaWrapper(){
   //     console.log(iframe.document.getElementById('query_box').value.split(' '));
   //     return false;
   // };
+
+  var countdown = iframe.document.createElement('IFRAME');
+  var html = `
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Circular Countdown CSS Animation</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-git.js">
+    </script>
+    <style id="compiled-css" type="text/css">
+    html, body {
+        height: 100%;
+    }
+
+    .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+    }
+
+    /* -- CIRCLE -- */
+    .circle {
+        width: 100px;
+        height: 100px;
+        position: relative;
+        border-radius: 999px;
+        box-shadow: inset 0 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
+    .l-half, .r-half {
+        float: left;
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .l-half:before, .r-half:before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        border: 20px solid white;
+        -webkit-animation-duration: 20s;
+        -webkit-animation-iteration-count: 1;
+        -webkit-animation-timing-function: linear;
+        -webkit-animation-fill-mode: forwards;
+    }
+
+    .l-half:before {
+        border-right: none;
+        border-top-left-radius: 999px;
+        border-bottom-left-radius: 999px;
+        -webkit-transform-origin: center right;
+        -webkit-animation-name: l-rotate;
+    }
+
+    .r-half:before {
+        border-left: none;
+        border-top-right-radius: 999px;
+        border-bottom-right-radius: 999px;
+        -webkit-transform-origin: center left;
+        -webkit-animation-name: r-rotate;
+    }
+
+    /* -- TIMER -- */
+    .count {
+        position: absolute;
+        width: 100%;
+        line-height: 100px;
+        text-align: center;
+        font-weight: 800;
+        font-size: 30px;
+        font-family: Helvetica;
+        color: white;
+        z-index: 2;
+        -webkit-animation: fadeout 0.5s 21s 1 linear;
+        -webkit-animation-fill-mode: forwards;
+    }
+    </style>
+
+    <!-- TODO: Missing CoffeeScript 2 -->
+
+    <script type="text/javascript">
+    $(window).on('load', function() {
+        $(document).ready(function() {
+            var n = $('.count').html() - 1;
+            setInterval(function() {
+                if (n >= 0) {
+                    if(n == 3){
+                        document.getElementById('countdowntimer').style.background = 'red';
+                    }
+                    $('.count').html(n--);
+                }
+            }, 1000);
+        });
+    });
+    </script>
+  </head>
+  <body id='countdowntimer'>
+      <div class="circle center">
+      <div class="count">20</div>
+      <div class="l-half"></div>
+      <div class="r-half"></div>
+  </div>
+
+  <!-- Animation keyframes here since JSF's SCSS ignores @keyframes -->
+
+  <style type="text/css">
+      @-webkit-keyframes l-rotate {
+          0% { -webkit-transform: rotate(0deg); }
+          50% { -webkit-transform: rotate(-180deg); }
+          100% { -webkit-transform: rotate(-180deg); }
+      }
+
+      @-webkit-keyframes r-rotate {
+          0% { -webkit-transform: rotate(0deg); }
+          50% { -webkit-transform: rotate(0deg); }
+          100% { -webkit-transform: rotate(-180deg); }
+      }
+
+      @-webkit-keyframes fadeout {
+          0% { opacity: 1; }
+          100% { opacity: 0.5; }
+      }
+  </style>
+
+
+    <script>
+      // tell the embed parent frame the height of the content
+      if (window.parent && window.parent.parent){
+        window.parent.parent.postMessage(["resultsFrame", {
+          height: document.body.getBoundingClientRect().height,
+          slug: "k9Law"
+        }], "*")
+      }
+
+      // always overwrite window.name, in case users try to set it manually
+      window.name = "result";
+    </script>
+  </body>
+  </html>
+`
+
+countdown.src = 'data:text/html;charset=utf-8,' + encodeURI(html);
+countdown.id = 'countdown';
+
+countdown.style.left = '0';
+countdown.style.position = 'absolute';
+countdown.style.textAlign = 'center';
+countdown.style.bottom = '10%';
+countdown.style.width = '100%';
+countdown.style.marginLeft = '59%';
+// countdown.style.background = '#FD5A5A';
+countdown.style.width = '40%';
+
+countdown.style.background = '#186490';
+iframe.document.body.appendChild(countdown);
 
 }
