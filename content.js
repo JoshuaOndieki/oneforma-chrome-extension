@@ -362,6 +362,10 @@ function formaWrapper(){
 
     };
 
+    iframe.document.getElementById('formawords').onkeydown = iframe.document.getElementById('formawords').onkeypress = iframe.document.getElementById('formawords').onkeyup = function() {
+        setFormaAttributes();
+    };
+
     function booleanSwitch(buttonId){
         button = iframe.document.getElementById(buttonId);
         if (button.value ==='yes'){
@@ -459,7 +463,16 @@ function formaWrapper(){
         var new_index = iframe.document.getElementById('query_box').value.split(word)[0].length;
     	var wordindex = object.value + new_index;
 
-        if(iframe.document.getElementById('query_box').value.includes(word) === false){
+        function validQuery(query){
+            for (var i = 0; i < word.split().length; i++) {
+                if(iframe.document.getElementById('query_box').value.includes(query[i]) === false) {
+                    return false
+                }
+            }
+            return true
+        }
+
+        if(validQuery(word.split(' ')) === false){
             alert('The object you intend to create does not appear in the query!');
             return false;
         }
@@ -686,8 +699,9 @@ function formaWrapper(){
                     if(n == 3){
                         document.getElementById('countdowntimer').style.background = 'red';
                     }
-                    $('.count').html(n--);
                 }
+                $('.count').html(n--);
+
             }, 1000);
         });
     });
