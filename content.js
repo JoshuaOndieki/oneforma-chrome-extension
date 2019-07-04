@@ -765,6 +765,7 @@ countdown.style.marginLeft = '59%';
 countdown.style.width = '40%';
 
 countdown.style.background = '#186490';
-iframe.document.body.appendChild(countdown);
+
+// iframe.document.body.appendChild(countdown); // Disable timer for now.
 
 }
