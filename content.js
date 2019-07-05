@@ -4,6 +4,37 @@ github: htpps:github.com/JoshuaOndieki
 */
 
 
+  // Temporarily fix for objects without delete button
+
+  // setTimeout(function(){ fixDeleteButton(); }, 10000);
+
+  function fixDeleteButton(){
+      var iframe = document.getElementById('webapp_frame').contentWindow;
+      while (iframe.document.getElementById('query_table').rows.length === 1) {
+          console.log('fixing..');
+      }
+      console.log(iframe.document.getElementById('query_table').rows.length);
+      iframe.document.querySelectorAll('tr').forEach(function(row){
+          try {
+              console.log('here');
+              console.log(row);
+              console.log(row.getElementsByTagName('td')[8].innerHTML);
+              if (row.getElementsByTagName('td')[8].innerHTML === '') {
+                  row.getElementsByTagName('td')[8].innerHTML = '<button type="button" onclick="DeleteRow(this.parentElement.parentElement.rowIndex);" class="btn btn-sm btn-danger temporary-fix-button"><i class="fa fa-trash"></i></button>';
+                  console.log('buttonfix');
+              }
+          } catch (err) {
+              console.log(err.message);
+          } finally {
+              console.log('finally');
+          }
+      });
+  }
+
+  // End temporary fix ^^^
+
+
+
 window.onload = function checkIframeLoaded() {
     console.log('checking if iframe is loaded...');
     // Get a handle to the iframe element
@@ -17,12 +48,15 @@ window.onload = function checkIframeLoaded() {
             console.log('iframe loaded!');
             formaWrapper();
 
+            setTimeout(function(){ fixDeleteButton(); }, 10);
+            // iframe.contentWindow.document.getElementById('query_table').addEventListener('load', fixDeleteButton());
+
         };
         return true;
     };
 
     // If we are here, it is not loaded. Set things up so we check   the status again in 100 milliseconds
-    console.log('retring iframe load...');
+    console.log('retrying iframe load...');
     window.setTimeout(checkIframeLoaded, 100);
 }
 
@@ -197,6 +231,11 @@ function formaWrapper(){
       width: 80%
   }
 
+  .temporary-fix-button{
+      background-color: blue;
+      border-color: blue;
+  }
+
   `;
 
 
@@ -212,6 +251,7 @@ function formaWrapper(){
     } else {
       style.appendChild(iframe.document.createTextNode(styles));
     }
+
 
     var formamain = iframe.document.createElement('DIV');
     formamain.id = 'formamain'; iframe.document.getElementById('TX_textbox_container').appendChild(formamain);
@@ -581,6 +621,7 @@ function formaWrapper(){
     }
     return result;
   }
+
 
   // document.getElementById("myForm").onsubmit = function() {
   // alert('edrtfvgy');
